@@ -39,7 +39,8 @@ public class PreviewSocket {
 
     @OnMessage
     public void onMessage(String message) {
-        log.info("Message: "+ message);
+        log.debug("Message Received");
+        log.trace("{}", message);
         //broadcast(">> " + message);
     }
 
@@ -47,7 +48,7 @@ public class PreviewSocket {
         sessions.values().forEach(s -> {
             s.getAsyncRemote().sendObject(message, result ->  {
                 if (result.getException() != null) {
-                    System.out.println("Unable to send message: " + result.getException());
+                    log.error("Unable to send message: {}", result.getException());
                 }
             });
         });
