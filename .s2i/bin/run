@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# run the application
+java -jar /tmp/src/target/preview-services-runner.jar
+
+
