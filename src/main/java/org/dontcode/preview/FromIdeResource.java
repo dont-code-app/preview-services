@@ -20,7 +20,8 @@ public class FromIdeResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response receiveUpdate (String update) {
-        log.debug("From IDE {}",update);
+        log.debug("Received from IDE");
+        log.trace("{}",update);
         preview.broadcast(update);
         return Response.ok().build();
     }
