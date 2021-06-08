@@ -37,16 +37,9 @@ public class PreviewResourceTest {
 
 
         var value = new JsonObject("""
-                {
-                    "type":"CHANGE",
-                    "change": {
-                        "type": "UPDATE",
-                        "position": "creation/entities/a",
-                        "value":{
+                            {
                                 "name":"entityA"
-                            }
-                        }
-                }""").toBsonDocument();
+                            }""").toBsonDocument();
         var pointer = new DontCodeModelPointer("creation/entities/a", "creation/entities","creation", "creation", null, "a");
 
         chg = new Change(Change.ChangeType.ADD, "creation/entities/a", value, pointer);
