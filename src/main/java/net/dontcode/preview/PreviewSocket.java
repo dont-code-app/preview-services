@@ -56,6 +56,7 @@ public class PreviewSocket {
      * @param message
      */
     public void broadcast(Message message) {
+        if (message.getSessionId()!=null) {
         Session s = sessions.get(message.getSessionId());
         if (s!=null) {
             s.getAsyncRemote().sendObject(message, result ->  {
@@ -63,9 +64,9 @@ public class PreviewSocket {
                     log.error("Unable to send message: {}", result.getException());
                 }
             });
+            return;
+        }}
 
-        } else {
-            log.error ("Could not find client listening to sessionId {}", message.getSessionId());
-        }
+        log.error ("Could not find client listening to sessionId {}", message.getSessionId());
     }
 }
