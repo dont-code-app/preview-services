@@ -17,9 +17,9 @@ import org.slf4j.LoggerFactory;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.time.Instant;
+import java.time.ZonedDateTime;
 
-import static com.mongodb.client.model.Filters.and;
-import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.*;
 
 @ApplicationScoped
 public class SessionService {
@@ -68,6 +68,20 @@ public class SessionService {
 
         return getSession().find(new FindOptions().filter(eq("id", id)).sort(Sorts.ascending("time"))).onFailure().invoke(throwable -> {
             log.error("Error Listing Session from Mongo {}", throwable.getMessage());
+        });
+    }
+
+    public Multi<Session> listSessions (ZonedDateTime from, ZonedDateTime to) {
+        FindOptions options = new FindOptions();
+        if( from!=null) {
+            options = options.filter(gte("time", from));
+        }
+        if( to!=null) {
+            options = options.filter(lte("time", to));
+        }
+
+        return getSession().find(options.sort(Sorts.ascending("time"))).onFailure().invoke(throwable -> {
+            log.error("Error Listing Sessions from/to using Mongo {}", throwable.getMessage());
         });
     }
 
