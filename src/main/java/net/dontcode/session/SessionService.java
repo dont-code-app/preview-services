@@ -77,37 +77,37 @@ public class SessionService {
 
     /**
      * Pipeline query:
-    $match:
-    {
-        $and: [ {
-        time: {
-            $gte: ISODate('2021-09-14T07:56:31.861+00:00'),
-                    $lt: ISODate('2021-09-14T18:00:20.049+00:00')
-        }}
-  ]
-    },
+     $match:
+     {
+     $and: [ {
+     time: {
+     $gte: ISODate('2021-09-14T07:56:31.861+00:00'),
+     $lt: ISODate('2021-09-14T18:00:20.049+00:00')
+     }}
+     ]
+     },
      $sort: {
      time: 1
      },
-      $group:   {
-      _id: "$id",
-      eltCount: {
-        $sum: 1
-      },
-      startDate: {
-        $min: "$time"
-      },
-      endDate: {
-        $max: "$time"
-      },
-      isDemo: {
-        $first: {$eq: [
-           "$srcInfo",
-          "demo"
-        ]
-        }
-      }
-    }
+     $group:   {
+     _id: "$id",
+     eltCount: {
+     $sum: 1
+     },
+     startDate: {
+     $min: "$time"
+     },
+     endDate: {
+     $max: "$time"
+     },
+     isDemo: {
+     $first: {$eq: [
+     "$srcInfo",
+     "demo"
+     ]
+     }
+     }
+     }
      * @param from
      * @param to
      * @return
@@ -132,11 +132,6 @@ public class SessionService {
             }}""";
             pipeline.add(Document.parse(match));
         }
-        String sort="""
-            {$sort: {
-              time: 1
-            }}""";
-        pipeline.add(Document.parse(sort));
         String group="""
             {$group: {
               _id: "$id",
@@ -158,6 +153,11 @@ public class SessionService {
               }
             }}]""";
         pipeline.add(Document.parse(group));
+        String sort="""
+            {$sort: {
+              startTime: -1
+            }}""";
+        pipeline.add(Document.parse(sort));
         return getSession().aggregate(pipeline, SessionOverview.class).onFailure().invoke(throwable -> {
             log.error("Error Listing Sessions from/to using Mongo {}", throwable.getMessage());
         });
