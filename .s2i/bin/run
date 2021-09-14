@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# run the application
-java -Dquarkus.profile=openshift -jar /tmp/src/target/preview-services-runner.jar

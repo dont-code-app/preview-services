@@ -11,6 +11,7 @@ import org.bson.codecs.DecoderContext;
 import org.bson.codecs.EncoderContext;
 
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 public class SessionCodec implements Codec<Session> {
     private final Codec<Document> documentCodec;
@@ -27,7 +28,7 @@ public class SessionCodec implements Codec<Session> {
         Document doc = new Document();
         doc.put("id", session.id());
         if( session.time() != null)
-            doc.put("time", session.time().atZone(ZoneId.systemDefault()).toLocalDateTime());
+            doc.put("time", session.time().toInstant());
         if( session.type() != null)
             doc.put("type", session.type().name());
         if( session.srcInfo() != null)
@@ -48,7 +49,7 @@ public class SessionCodec implements Codec<Session> {
         Document document = documentCodec.decode(reader, decoderContext);
         var changeDoc =document.get("change", Document.class);
         Session session = new Session(document.getString("id"),
-                document.getDate("time").toInstant(),
+                ZonedDateTime.ofInstant(document.getDate("time").toInstant(), ZoneId.systemDefault()),
                 SessionActionType.valueOf(document.getString("type")),
                 document.getString("srcInfo"),
                 changeCodec.fromDocument(changeDoc));
