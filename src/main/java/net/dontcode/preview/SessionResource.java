@@ -16,7 +16,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
-@Path("/sessions")
+@Path("/preview/sessions")
 public class SessionResource {
     private static Logger log = LoggerFactory.getLogger(SessionResource.class);
 
