@@ -58,6 +58,7 @@ jobs:
         source: "target/preview-services-runner.jar"
         target: "/home/dont-code/services"
         strip_components: 1
+        use_insecure_cipher: true
     - name: Restart test
       uses: appleboy/ssh-action@master
       with:
@@ -65,5 +66,6 @@ jobs:
         username: root
         key: ${{ secrets.TEST_KEY }}
         passphrase: ${{ secrets.TEST_PASSPHRASE }}
+        use_insecure_cipher: true
         script:
           sudo -u dont-code /home/dont-code/bin/restart-service.sh preview-services
