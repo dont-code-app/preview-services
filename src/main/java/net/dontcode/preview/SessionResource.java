@@ -25,14 +25,14 @@ public class SessionResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Multi<SessionOverview> listSessions (@QueryParam("from") Date from, @QueryParam("to") Date to) {
+    public Multi<SessionOverview> listSessions (@QueryParam("from") Date from, @QueryParam("to") Date to, @QueryParam("srcInfo") String srcInfo) {
         log.debug("Request session overviews from {} to {}", from, to);
         ZonedDateTime fromZoned = null;
         ZonedDateTime toZoned = null;
         if( from != null) fromZoned = from.toInstant().atZone(ZoneId.systemDefault());
         if( to != null) toZoned = to.toInstant().atZone(ZoneId.systemDefault());
         return sessionService.listSessionOverview (
-            fromZoned, toZoned
+            fromZoned, toZoned, srcInfo
         );
     }
 }
