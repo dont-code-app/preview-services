@@ -1,8 +1,8 @@
 package net.dontcode.preview;
 
 import io.smallrye.mutiny.Multi;
-import net.dontcode.session.SessionOverview;
-import net.dontcode.session.SessionService;
+import net.dontcode.common.session.SessionOverview;
+import net.dontcode.common.session.SessionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

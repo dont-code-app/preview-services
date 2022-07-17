@@ -14,4 +14,5 @@ module ide.services {
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
     requires net.dontcode.core;
+    requires net.dontcode.common.quarkus.mongo;
 }
