@@ -1,9 +1,9 @@
 package net.dontcode.preview;
 
 import net.dontcode.core.Message;
-import net.dontcode.session.SessionActionType;
-import net.dontcode.session.SessionService;
-import net.dontcode.websocket.MessageEncoderDecoder;
+import net.dontcode.common.session.SessionActionType;
+import net.dontcode.common.session.SessionService;
+import net.dontcode.common.websocket.MessageEncoderDecoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
