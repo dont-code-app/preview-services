@@ -103,11 +103,11 @@ public class PreviewSocketTest extends AbstractMongoTest {
                 {
                     "name":"entityA"
                 }""").toBsonDocument();
-        var pointer = new DontCodeModelPointer("creation/entities/a", "creation/entities","creation", "creation", null, "a");
+        var pointer = new DontCodeModelPointer("creation/entities/a", "creation/entities","creation", "creation", "a", Boolean.TRUE);
         chg = new Change(Change.ChangeType.RESET, "creation/entities/a", value, pointer);
         sessionService.updateSession(otherSessionId, chg).await().indefinitely();
 
-        pointer = new DontCodeModelPointer("creation/entities/a/name", "creation/entities/name","creation/entities/a", "creation/entities", "name", null);
+        pointer = new DontCodeModelPointer("creation/entities/a/name", "creation/entities/name","creation/entities/a", "creation/entities", "name", Boolean.FALSE);
         chg = new Change(Change.ChangeType.ADD, "creation/entities/a/name", "NewNameA", pointer);
         sessionService.updateSession(otherSessionId, chg).await().indefinitely();
 

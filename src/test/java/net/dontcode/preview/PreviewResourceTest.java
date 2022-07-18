@@ -40,7 +40,7 @@ public class PreviewResourceTest {
                             {
                                 "name":"entityA"
                             }""").toBsonDocument();
-        var pointer = new DontCodeModelPointer("creation/entities/a", "creation/entities","creation", "creation", null, "a");
+        var pointer = new DontCodeModelPointer("creation/entities/a", "creation/entities","creation", "creation", "a", Boolean.TRUE);
 
         chg = new Change(Change.ChangeType.ADD, "creation/entities/a", value, pointer);
         toSend = new Message(Message.MessageType.CHANGE, chg);
@@ -54,7 +54,7 @@ public class PreviewResourceTest {
         Mockito.verify(previewSocket, Mockito.times(2)).broadcast(Mockito.any(Message.class));
 
 
-        pointer = new DontCodeModelPointer("creation/entities/a/name", "creation/entities/name","creation/entities/a", "creation/entities", "name", null);
+        pointer = new DontCodeModelPointer("creation/entities/a/name", "creation/entities/name","creation/entities/a", "creation/entities", "name", Boolean.FALSE);
 
         chg = new Change(Change.ChangeType.ADD, "creation/entities/a/name", "NewNameA", pointer);
         toSend = new Message(Message.MessageType.CHANGE, chg);
