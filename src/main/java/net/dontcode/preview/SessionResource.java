@@ -1,16 +1,15 @@
 package net.dontcode.preview;
 
 import io.smallrye.mutiny.Multi;
+import io.smallrye.mutiny.Uni;
+import net.dontcode.common.session.SessionDetail;
 import net.dontcode.common.session.SessionOverview;
 import net.dontcode.common.session.SessionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -34,5 +33,13 @@ public class SessionResource {
         return sessionService.listSessionOverview (
             fromZoned, toZoned, srcInfo
         );
+    }
+
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Uni<SessionDetail> getSession (@PathParam("id") String id) {
+        log.debug("Request session detail of {}", id);
+        return sessionService.getSession (id);
     }
 }
