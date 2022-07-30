@@ -16,7 +16,7 @@
     <quarkus.platform.version>2.10.2.Final</quarkus.platform.version>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
-    <dontcode-common.version>0.2.2</dontcode-common.version>
+    <dontcode-common.version>0.2.3-SNAPSHOT</dontcode-common.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -80,6 +80,12 @@
       <groupId>jakarta.xml.bind</groupId>
       <artifactId>jakarta.xml.bind-api</artifactId>
       <version>2.3.3</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.dontcode</groupId>
+      <artifactId>core</artifactId>
+      <version>0.2.2-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
