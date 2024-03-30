@@ -1,10 +1,9 @@
-name: Development Build
+name: Main Build
 
 on:
   push:
-    branches: [ Development ]
-  pull_request:
-    branches: [ Development ]
+    branches: [ main ]
+
 jobs:
   build:
 
@@ -20,7 +19,8 @@ jobs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
-        ref: Development
+        ref: main
+
     - name: Set up JDK 21
       uses: actions/setup-java@v4
       with:
@@ -31,5 +31,11 @@ jobs:
       with:
         path: .m2/repository # maven repository files are stored here
         key: ${{ runner.OS }}-maven-${{ hashFiles('pom.xml') }}
-    - name: Build with Maven
+    - name: Build
       run: mvn -B package --file pom.xml
+    - uses: actions/upload-artifact@v4
+        # Test run screenshots only on failure
+      if: success()
+      with:
+        name: preview-services-runner.jar
+        path: target/preview-services-runner.jar
