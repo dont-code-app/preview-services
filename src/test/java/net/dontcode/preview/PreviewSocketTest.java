@@ -4,6 +4,8 @@ import io.quarkus.test.common.http.TestHTTPResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.junit.TestProfile;
 import io.restassured.http.ContentType;
+import jakarta.inject.Inject;
+import jakarta.websocket.*;
 import net.dontcode.core.Change;
 import net.dontcode.core.DontCodeModelPointer;
 import net.dontcode.core.Message;
@@ -14,8 +16,6 @@ import org.bson.json.JsonObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import javax.inject.Inject;
-import javax.websocket.*;
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
